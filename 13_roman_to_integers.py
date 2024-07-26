@@ -42,6 +42,15 @@
 # s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
 # It is guaranteed that s is a valid roman numeral in the range [1, 3999].
 
+def get_first_digit(value):
+    return int(str(value)[0])
+
+def hasNext(value, value2):
+    ret = False
+    if value -1 > value2:
+        ret = True
+    return ret
+
 class Solution(object):
 
     def romanToInt(self, s):
@@ -49,7 +58,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        roman_to_int = {
+        convert = {
             'I': 1,
             'V': 5,
             'X': 10,
@@ -62,9 +71,33 @@ class Solution(object):
         i = 0
         num = 0
         while i < len(s):
-            print(roman_to_int[s[i]])
-            # num += self.romanToInt(s[i])
-            i += 1
+            if hasNext(len(s), i):
+                num1 = convert[s[i]]
+                num2 = convert[s[i+1]]
+                if num1 < num2 and num2 / num1 == 10:
+                    i += 1
+                    num += num2-num1
+                elif num1 == num2 and get_first_digit(num1) == 1:
+                    i = i+1
+                    if hasNext(len(s), i):
+                        num3 = convert[s[i+1]]
+                        if num2 == num3:
+                            i = i+1
+                            num += num3 * 3
+                        else:
+                            num += num2*2
+                    else:
+                        num += num2*2
 
+                elif num1 < num2 and num2 / num1 == 5:
+                    i += 1
+                    num += num2-num1
+                else:
+                    num += convert[s[i]]
+            else:
+                num += convert[s[i]]
+            i += 1
+        print(num)
+        return num
 
 Solution().romanToInt("LVIII")
