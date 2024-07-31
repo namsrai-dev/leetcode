@@ -37,6 +37,40 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        print(nums)
+        arr = []
+        for i in range(len(nums)-2):
+            for j in range(i+1, len(nums)-1):
+                for k in range(j+1, len(nums)):
+                    if (nums[i] + nums[j] + nums[k] == 0):
+                        arr.append([nums[i], nums[j], nums[k]])
+        print("arr1", arr)
+        print("cleared", clear_duplicate(arr))
+        return clear_duplicate(arr)
 
-Solution().threeSum([-1,0,1,2,-1,-4])
+def clear_duplicate(nums):
+    arr = []
+    if len(nums) >= 1:
+        arr.append(nums[0])
+    for i in range(1, len(nums) - 1):
+        # print("i", i)
+        for j in range(len(nums)):
+            print("asasd",nums[i], nums[j])
+            if is_dupl(nums[i], nums[j]) == False and i != j:
+                arr.append(nums[i])
+    return arr
+
+def is_dupl(nums1, nums2):
+    count = 0
+    for num1 in nums1:
+        for num2 in nums2:
+            if num1 == num2:
+                count += 1
+    # print("count",count)
+    return count >= 3
+
+
+
+
+Solution().threeSum([-2,0,1,1,2]
+
+)
