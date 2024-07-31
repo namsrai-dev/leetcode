@@ -30,3 +30,13 @@
 
 # 3 <= nums.length <= 3000
 # -105 <= nums[i] <= 105
+
+class Solution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        print(nums)
+
+Solution().threeSum([-1,0,1,2,-1,-4])
