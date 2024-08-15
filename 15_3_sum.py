@@ -30,49 +30,42 @@
 
 # 3 <= nums.length <= 3000
 # -105 <= nums[i] <= 105
-
 class Solution(object):
+
     def threeSum(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
         arr = []
-        for i in range(len(nums)-2):
-            for j in range(i+1, len(nums)-1):
-                for k in range(j+1, len(nums)):
-                    if (nums[i] + nums[j] + nums[k] == 0):
-                        arr.append([nums[i], nums[j], nums[k]])
-        return clear_duplicate(arr)
+        nums = sorted(nums)
 
-def clear_duplicate(nums):
-    arr = []
-    for i in range(len(nums)):
-        check = False
-        for j in range(i + 1, len(nums)):
-            if is_dupl(nums[i], nums[j]):
-                check = True
-        if not check:
-            arr.append(nums[i])
-    return arr
+        for i, a in enumerate(nums):
+            if i > 0 and a == nums[i-1]:
+                continue
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                threeSum = a + nums[l] + nums[r]
+                if threeSum > 0:
+                    r -= 1
+                elif threeSum < 0:
+                    l += 1
+                elif threeSum == 0:
+                    arr.append([a, nums[l], nums[r]])
+                    r = findNum(r, l, nums)
+                    l += 1
+                    # r -= 1
+        return arr
 
-def is_dupl(nums1, nums2):
-    idx1 = []
-    idx2 = []
-    for i in range(len(nums1)):
-        num1 = nums1[i]
-        for j in range(len(nums2)):
-            num2 = nums2[j]
-            if num1 == num2 and not has_contain(i, idx1) and not has_contain(j, idx2):
-                idx1.append(i)
-                idx2.append(j)
+def findNum(r, l, nums):
+    if r - 1 == l or nums[r] != nums[r-1]:
+        return r - 1
+    else:
+        i = r - 1
+        while nums[r] == nums[i] and i >= 0:
+            i -=1
+        return i
 
-    return len(idx1) == 3
 
-def has_contain(idx ,arr):
-    ret = False
-    for num in arr:
-        ret = num == idx
-    return ret
-
-Solution().threeSum([-13,5,13,12,-2,-11,-1,12,-3,0,-3,-7,-7,-5,-3,-15,-2,14,14,13,6,-11,-11,5,-15,-14,5,-5,-2,0,3,-8,-10,-7,11,-5,-10,-5,-7,-6,2,5,3,2,7,7,3,-10,-2,2,-12,-11,-1,14,10,-9,-15,-8,-7,-9,7,3,-2,5,11,-13,-15,8,-3,-7,-12,7,5,-2,-6,-3,-10,4,2,-5,14,-3,-1,-10,-3,-14,-4,-3,-7,-4,3,8,14,9,-2,10,11,-10,-4,-15,-9,-1,-1,3,4,1,8,1])
+# Solution().threeSum([-2,0,0,2,2])
+Solution().threeSum([-1,0,1,2,-1,-4])
