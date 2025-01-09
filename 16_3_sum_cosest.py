@@ -31,8 +31,9 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        for i in nums:
-            print("i", i)
+
+        for i in range(1, len(nums) - 1):
+            print(nums[i])  # Starts at index 1, ends at index len(arr)-2
 
 
 
