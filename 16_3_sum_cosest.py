@@ -31,9 +31,16 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-
+        diff = None
         for i in range(1, len(nums) - 1):
-            print(nums[i])  # Starts at index 1, ends at index len(arr)-2
+            if diff is None:
+                diff = target - nums[i-1] + nums[i] + nums[i+1]
+            else:
+                sum = nums[i-1] + nums[i] + nums[i+1]
+                if target - sum < diff:
+                    diff = target - sum
+        print(diff)
+        return diff
 
 
 
