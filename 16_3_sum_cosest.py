@@ -31,19 +31,20 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        diff = None
+        closest = None
         for i in range(1, len(nums) - 1):
             sum = nums[i-1] + nums[i] + nums[i+1]
-            if diff is None:
-                diff = target - nums[i-1] + nums[i] + nums[i+1]
+            if closest is None:
+                    closest = sum
             else:
-                if target - sum < diff:
-                    diff = target - sum
-        print(diff)
-        return diff
+                diff1 = abs(target - closest)
+                diff2 = abs(target - sum)
+                if diff2 <= diff1:
+                    closest = sum
+        return closest
 
 
 
 solution = Solution()
-solution.threeSumClosest([-1,2,1,-4], 1)
+print(solution.threeSumClosest([4,0,5,-5,3,3,0,-4,-5], -2))
 
