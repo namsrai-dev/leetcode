@@ -33,10 +33,10 @@ class Solution(object):
         """
         diff = None
         for i in range(1, len(nums) - 1):
+            sum = nums[i-1] + nums[i] + nums[i+1]
             if diff is None:
                 diff = target - nums[i-1] + nums[i] + nums[i+1]
             else:
-                sum = nums[i-1] + nums[i] + nums[i+1]
                 if target - sum < diff:
                     diff = target - sum
         print(diff)
