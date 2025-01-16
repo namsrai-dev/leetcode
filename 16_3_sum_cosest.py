@@ -32,19 +32,24 @@ class Solution(object):
         :rtype: int
         """
         closest = None
-        for i in range(1, len(nums) - 1):
-            sum = nums[i-1] + nums[i] + nums[i+1]
-            if closest is None:
-                    closest = sum
-            else:
-                diff1 = abs(target - closest)
-                diff2 = abs(target - sum)
-                if diff2 <= diff1:
-                    closest = sum
+        for i in range(len(nums) - 2):
+            num1 = nums[i]
+            for j in range(i+1, len(nums) -1):
+                num2 = nums[j]
+                for k in range(j+1, len(nums)):
+                    num3 = nums[k]
+                    sum = num1 + num2 + num3
+                    if closest is None:
+                            closest = sum
+                    else:
+                        diff1 = abs(target - closest)
+                        diff2 = abs(target - sum)
+                        if diff2 <= diff1:
+                            closest = sum
         return closest
-
 
 
 solution = Solution()
 print(solution.threeSumClosest([4,0,5,-5,3,3,0,-4,-5], -2))
+# print(solution.threeSumClosest([1,2,3,4,5], -2))
 
