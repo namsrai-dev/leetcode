@@ -51,5 +51,5 @@ class Solution(object):
 
 solution = Solution()
 print(solution.threeSumClosest([4,0,5,-5,3,3,0,-4,-5], -2))
-# print(solution.threeSumClosest([1,2,3,4,5], -2))
+print(solution.threeSumClosest([1,2,3,4,5], -2))
 
