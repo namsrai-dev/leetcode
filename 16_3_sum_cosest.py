@@ -31,25 +31,38 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        closest = None
+        closest = float('inf')
+        nums.sort()
         for i in range(len(nums) - 2):
-            num1 = nums[i]
-            for j in range(i+1, len(nums) -1):
-                num2 = nums[j]
-                for k in range(j+1, len(nums)):
-                    num3 = nums[k]
-                    sum = num1 + num2 + num3
-                    if closest is None:
-                            closest = sum
-                    else:
-                        diff1 = abs(target - closest)
-                        diff2 = abs(target - sum)
-                        if diff2 <= diff1:
-                            closest = sum
+            print("i =>", i)
+            left = i + 1
+            right = len(nums) - 1
+            while right > left:
+                print(i, left, right)
+                num1 = nums[i]
+                num2 = nums[right]
+                num3 = nums[left]
+                sum = num1 + num2 + num3
+                print("sum =>",sum)
+                diff1 = abs(closest - target)
+                diff2 = abs(sum - target)
+                print("diff1 =>",diff1)
+                print("diff2 =>",diff2)
+                if diff2 < diff1:
+                    closest = sum
+                if sum < target:
+                     left += 1
+                     print("left --", left)
+                elif sum > target:
+                     right -= 1
+                     print("right ++", right)
+                else:
+                     return sum
         return closest
 
 
 solution = Solution()
-print(solution.threeSumClosest([4,0,5,-5,3,3,0,-4,-5], -2))
-print(solution.threeSumClosest([1,2,3,4,5], -2))
+# print(solution.threeSumClosest([4,0,5,-5,3,3,0,-4,-5], -2))
+# print(solution.threeSumClosest([1,2,3,4,5], -2))
+print(solution.threeSumClosest([-1,2,1,-4], 1))
 

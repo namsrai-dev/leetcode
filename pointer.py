@@ -7,6 +7,7 @@ class Solution(object):
         """
         nums.sort()
         closest_sum = float('inf')
+        print("float('inf')", float('inf'))
         print("sure ?", nums)
         for i in range(len(nums) - 2):
             print("i", i)
@@ -15,6 +16,7 @@ class Solution(object):
                 print("left", left)
                 print("right", right)
                 current_sum = nums[i] + nums[left] + nums[right]
+                print("current_sum", current_sum)
                 if abs(current_sum - target) < abs(closest_sum - target):
                     closest_sum = current_sum
                 if current_sum < target:
@@ -26,4 +28,6 @@ class Solution(object):
         return closest_sum
 
 solution = Solution()
-print(solution.threeSumClosest([-1, 2, -1, 6, -1, 6, 2 -1], -2))
+# print(solution.threeSumClosest([-1, 2, -1, 6, -1, 6, 2 -1], -2))
+print(solution.threeSumClosest([-4,2,2,3,3,3], 0))
+print(solution.threeSumClosest([-1,2,1,-4], 1))
