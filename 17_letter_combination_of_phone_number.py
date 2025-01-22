@@ -45,7 +45,20 @@ class Solution(object):
         arr = []
         result = []
         for l in digits:
-            print(l)
+            for a in arr:
+                print("=>", a)
+                for str in obj[int(l)]:
+                    print("==>", a + str)
+                    result.append(a + str)
+            arr2 = []
+            for str in obj[int(l)]:
+                arr2.append(str)
+            print("=====")
+            if len(arr) == 0:
+                arr = arr2
+                result = arr2
+            else:
+                arr = result
         return result
 
 
