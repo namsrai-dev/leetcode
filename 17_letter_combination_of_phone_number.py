@@ -45,16 +45,9 @@ class Solution(object):
         arr = []
         result = []
         for l in digits:
-            digit = int(l)
-            arr.append(obj[digit])
-        if len(arr) > 0:
-            for a in arr[0]:
-                for i in range(1, len(arr)):
-                    for str in arr[i]:
-                        result.append(a + str)
-                        # print("str", a + str)
+            print(l)
         return result
 
 
 solution = Solution()
-print(solution.letterCombinations("2"))
+print(solution.letterCombinations("234"))
