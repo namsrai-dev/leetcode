@@ -5,8 +5,12 @@
 # all permutations of string s
 def recurPermute(index, s, ans):
 
+    print(" ----- ")
+
     # Base Case
     if index == len(s):
+        print("index and length are equal")
+        print(index, len(s))
         ans.append("".join(s))
         return
 
@@ -15,7 +19,7 @@ def recurPermute(index, s, ans):
     for i in range(index, len(s)):
         s[index], s[i] = s[i], s[index]
         recurPermute(index + 1, s, ans)
-        # s[index], s[i] = s[i], s[index]
+        s[index], s[i] = s[i], s[index]
 
 # Function to find all unique permutations
 def findPermutation(s):

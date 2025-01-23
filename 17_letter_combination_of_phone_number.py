@@ -25,14 +25,14 @@
 # digits[i] is a digit in the range ['2', '9'].
 
 obj = {
-    2: ["a", "b", "c"],
-    3: ["d", "e", "f"],
-    4: ["g", "h", "i"],
-    5: ["j", "k", "l"],
-    6: ["m", "n", "o"],
-    7: ["p", "q", "r", "s"],
-    8: ["t", "u", "v"],
-    9: ["w", "x", "y", "z"],
+    "2": ["a", "b", "c"],
+    "3": ["d", "e", "f"],
+    "4": ["g", "h", "i"],
+    "5": ["j", "k", "l"],
+    "6": ["m", "n", "o"],
+    "7": ["p", "q", "r", "s"],
+    "8": ["t", "u", "v"],
+    "9": ["w", "x", "y", "z"],
 }
 
 
@@ -42,25 +42,21 @@ class Solution(object):
         :type digits: str
         :rtype: List[str]
         """
-        arr = []
         result = []
-        for l in digits:
-            for a in arr:
-                print("=>", a)
-                for str in obj[int(l)]:
-                    print("==>", a + str)
-                    result.append(a + str)
-            arr2 = []
-            for str in obj[int(l)]:
-                arr2.append(str)
-            print("=====")
-            if len(arr) == 0:
-                arr = arr2
-                result = arr2
-            else:
-                arr = result
+        def backtrack(i, curStr):
+            if len(curStr) == len(digits):
+                result.append(curStr)
+                return
+            for c in obj[digits[i]]:
+                backtrack(i+1, curStr+c)
+
+        if digits:
+            backtrack(0, "")
+
         return result
 
 
+
+
 solution = Solution()
-print(solution.letterCombinations("234"))
+print(solution.letterCombinations("23"))
