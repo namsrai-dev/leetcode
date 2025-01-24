@@ -48,11 +48,11 @@ class Solution(object):
                 result.append(curStr)
                 return
             for c in obj[digits[i]]:
+                # print("every loop of c", c)
                 backtrack(i+1, curStr+c)
 
         if digits:
             backtrack(0, "")
-
         return result
 
 
