@@ -10,16 +10,17 @@
 # Output: “AAA”, “AAA”, “AAA”, “AAA”, “AAA”, “AAA”
 
 class Solution(object):
-    def permitationsOfString(self, strings):
+    def permutationsOfString(self, strings):
         results = []
         def backtrack(i, curStr):
             if len(curStr) == len(strings):
+                print("push hiigdle", curStr)
                 results.append(curStr)
                 return
 
             for c in strings:
-                print(c, curStr)
                 if c not in curStr:
+                    print(c, curStr)
                     backtrack(i+1, curStr+c)
 
         if strings:
@@ -29,4 +30,4 @@ class Solution(object):
 
 
 solution = Solution()
-print(solution.permitationsOfString("ABC"))
+print(solution.permutationsOfString("ABC"))
