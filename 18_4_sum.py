@@ -21,3 +21,27 @@
 # 1 <= nums.length <= 200
 # -109 <= nums[i] <= 109
 # -109 <= target <= 109
+
+class Solution(object):
+    def fourSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        print(nums)
+        result = []
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                for k in range(j+1, len(nums)):
+                    for a in range(k+1, len(nums)):
+                        sum = nums[i] + nums[j] + nums[k] + nums[a]
+                        if sum == target:
+                            result.append([nums[i], nums[j], nums[k], nums[a]])
+
+        return result
+
+
+
+sol = Solution()
+print(sol.fourSum([1,0,-1,0,-2,2], 0))
