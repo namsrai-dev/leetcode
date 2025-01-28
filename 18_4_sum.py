@@ -27,6 +27,7 @@ class Solution(object):
         """
         :type nums: List[int]
         :type target: int
+        :i just wanna be pro leetcoder
         :rtype: List[List[int]]
         """
         result = []
