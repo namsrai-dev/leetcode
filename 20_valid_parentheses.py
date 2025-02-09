@@ -50,3 +50,25 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        ret = True
+        arr = []
+        for i in range(len(s)):
+            if arr:
+                if self.is_pair(arr[-1], s[i]):
+                    arr.pop()
+                    continue
+            arr.append(s[i])
+        if len(arr) != 0:
+            ret = False
+        print(arr)
+
+        return ret
+
+    def is_pair(self, last, cur):
+        if last == "(" and cur == ")" or last == "{" and cur == "}" or last == "[" and cur == "]":
+            return True
+        return False
+
+solution = Solution()
+print(solution.isValid("([)])"))
+print(solution.isValid("()[]{}"))
