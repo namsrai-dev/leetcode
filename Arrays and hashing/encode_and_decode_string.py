@@ -15,7 +15,6 @@ class Solution:
             j = i
             while s[j] != '#':
                 j += 1
-            print("first j is", j)
             length = int(s[i:j])
             i = j + 1
             j = i + length
