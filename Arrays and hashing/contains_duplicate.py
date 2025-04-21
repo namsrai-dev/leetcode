@@ -4,15 +4,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        ret = False
         new_dict = set(nums)
-        print("len", len(new_dict))
-        # for i in range(len(nums)-1):
-        #     for j in range(i+1, len(nums)):
-        #         if nums[i] == nums[j]:
-        #             return True
-
-        return ret
+        if len(new_dict) == len(nums):
+            return True
+        return False
         
 
 solution = Solution()
