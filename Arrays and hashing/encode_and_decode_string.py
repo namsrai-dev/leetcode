@@ -4,6 +4,7 @@ class Solution:
         res = ""
         for s in strs:
             res += str(len(s)) + "#" + s
+        print("decoded", res)
         return res
 
     def decode(self, s: str) -> list[str]:
@@ -14,6 +15,7 @@ class Solution:
             j = i
             while s[j] != '#':
                 j += 1
+            print("first j is", j)
             length = int(s[i:j])
             i = j + 1
             j = i + length
