@@ -70,7 +70,7 @@ class Solution(object):
                 idx -= 1
             else:
                 idx +=1
-        return tokens[0]
+        return int(tokens[0])
         
 
 sol = Solution()
