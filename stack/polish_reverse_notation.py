@@ -41,3 +41,37 @@
 
 # 1 <= tokens.length <= 104
 # tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the range [-200, 200].
+class Solution(object):
+    def evalRPN(self, tokens):
+        """
+        :type tokens: List[str]
+        :rtype: int
+        """
+        idx = 2
+        opers = ["*", "/", "-", "+"]
+        while len(tokens) > 2:
+            if tokens[idx] in opers:
+                if tokens[idx] == "*":
+                    tokens[idx-1] = int(tokens[idx-2]) * int(tokens[idx-1])
+                    tokens.pop(idx)
+                    tokens.pop(idx-2)
+                elif tokens[idx] == "/":
+                    tokens[idx-1] = int(tokens[idx-2]) / int(tokens[idx-1])
+                    tokens.pop(idx)
+                    tokens.pop(idx-2)
+                elif tokens[idx] == "-":
+                    tokens[idx-1] = int(tokens[idx-2]) - int(tokens[idx-1])
+                    tokens.pop(idx)
+                    tokens.pop(idx-2)
+                elif tokens[idx] == "+":
+                    tokens[idx-1] = int(tokens[idx-2]) + int(tokens[idx-1])
+                    tokens.pop(idx)
+                    tokens.pop(idx-2)
+                idx -= 1
+            else:
+                idx +=1
+        return tokens[0]
+        
+
+sol = Solution()
+print(sol.evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
