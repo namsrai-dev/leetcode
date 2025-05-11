@@ -28,18 +28,15 @@
 
 class Solution:
     def dailyTemperatures(self, temperatures: list[int]) -> list[int]:
-        ret = []
-        for i in range(len(temperatures)):
-            j = i+1
-            count = 0
-            while j < len(temperatures):
-                print(i, j)
-                if temperatures[j] > temperatures[i]:
-                    count = j - i
-                    j = len(temperatures)
-                j+=1
-            ret.append(count)
-        return ret
+        res = [0] * len(temperatures)
+        stack = []  # pair: [temp, index]
+
+        for i, t in enumerate(temperatures):
+            while stack and t > stack[-1][0]:
+                stackT, stackInd = stack.pop()
+                res[stackInd] = i - stackInd
+            stack.append((t, i))
+        return res
     
 sol = Solution()
-print(sol.dailyTemperatures([73,74,75,71,69,72,76,73]))
+print(sol.dailyTemperatures([30,38,30,36,35,40,28]))
