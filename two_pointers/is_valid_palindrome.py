@@ -7,4 +7,5 @@ class Solution:
         return True
     
 sol = Solution()
-print(sol.isPalindrome("0P"))
+# print(sol.isPalindrome("0P"))
+print(ord("A"))
