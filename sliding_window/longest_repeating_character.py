@@ -33,19 +33,22 @@ class Solution:
         replace_count = 0
         ret = 0
         for i in s:
-            if s in window_arr:
+            if i in window_arr or len(window_arr) == 0:
                 window_arr.append(i)
+            elif k == 0:
+                window_arr = [i]
             else:
                 if replace_count < k:
-                    replace_count+=1
+                    replace_count += 1
                 else:
-                    while replace_count < k:
+                    while replace_count >= k and replace_count > 0:
                         if window_arr.pop(0) != i:
                             replace_count -= 1
+            ret = max(ret, len(window_arr) + replace_count)
 
         return ret
 
 
 sol = Solution()
-s = "AABABBA", k = 1
-print(sol.characterReplacement("AABABBA", 1))
+# s = "AABABBA", k = 1
+print(sol.characterReplacement("BAAA", 0))
