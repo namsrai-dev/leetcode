@@ -35,16 +35,14 @@ class Solution:
         for i in s:
             if i in window_arr or len(window_arr) == 0:
                 window_arr.append(i)
-            elif k == 0:
-                window_arr = [i]
+            elif replace_count < k:
+                replace_count += 1
+                window_arr.append(i)
             else:
-                if replace_count < k:
-                    replace_count += 1
-                else:
-                    while replace_count >= k and replace_count > 0:
-                        if window_arr.pop(0) != i:
-                            replace_count -= 1
-            ret = max(ret, len(window_arr) + replace_count)
+                while window_arr.append():
+                    print(window_arr)
+                
+                
 
         return ret
 
