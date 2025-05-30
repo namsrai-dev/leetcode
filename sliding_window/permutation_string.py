@@ -3,10 +3,8 @@ class Solution:
         s1_dict = self.convertDict(s1)
         for i in range(len(s1), len(s2)+1):
             window = s2[i-len(s1):i]
-            print(window)
             if set(window) == set(s1):
                 window_dict = self.convertDict(window)
-                print("same case ->", window_dict, s1_dict)
                 if s1_dict == window_dict:
                     return True
         return False
