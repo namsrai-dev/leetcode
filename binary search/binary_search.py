@@ -1,5 +1,6 @@
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
+        print("len(nums)", len(nums))
         l, r = 0, len(nums)
 
         while l < r:
