@@ -19,7 +19,6 @@ class Solution:
                 else:
                     r = mid - 1
             else:
-                print("gajig", l, mid, r)
                 if l == r:
                     return -1
                 else:
