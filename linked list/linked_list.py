@@ -22,13 +22,16 @@ class LinkedList:
     def pop(self):
         if self.head is None:
             return None
+        
         if not self.head.next:
             pop_value = self.head.value
             self.head = None
             return pop_value
+        
         cur = self.head
         while cur.next.next:
             cur = cur.next
+
         pop_value = cur.next.value
         cur.next = None
 
@@ -38,7 +41,22 @@ class LinkedList:
             print(temp.value)
             temp = temp.next
 
+    def reverse_list(self):
+        prev, curr = None, self.head
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        return prev
+
+
 linked_list = LinkedList()
 linked_list.append(1)
 linked_list.append(2)
+linked_list.append(3)
+linked_list.append(4)
+linked_list.pop()
+linked_list.print_list()
+print(linked_list.reverse_list())
 linked_list.print_list()
