@@ -28,16 +28,21 @@ class LinkedList:
             temp = temp.next
 
 
-# def merge_two_list(list1: LinkedList, list2: LinkedList):
-#     temp1 = list1.head
-#     temp2 = list2.head
-#     new_node
+def merge_two_list(list1: LinkedList, list2: LinkedList):
+        dummy = node = ListNode()
 
-#     while temp1 or temp2:
-#         if temp1 and temp2:
-#             if temp1.value > temp2.value:
-#                 temp1
+        while list1 and list2:
+            if list1.val < list2.val:
+                node.next = list1
+                list1 = list1.next
+            else:
+                node.next = list2
+                list2 = list2.next
+            node = node.next
 
+        node.next = list1 or list2
+
+        return dummy.next
 
 # def append
 
