@@ -21,11 +21,27 @@ class LinkedList:
     def print_list(self):
         temp = self.head
         while temp is not None:
+            print(temp.val)
             temp = temp.next
 
+    def reverse_linked_list(self):
+        curr = self.head
+        prev = None
+        while curr is not None:
+            nextNode = curr.next
+            curr.next = prev
+
+            prev = curr
+            curr = nextNode
+
+        self.head = prev
     
 linked_list = LinkedList()
 linked_list.append(0)
 linked_list.append(1)
 linked_list.append(2)
+linked_list.append(3)
+linked_list.append(4)
+linked_list.print_list()
+linked_list.reverse_linked_list()
 linked_list.print_list()
