@@ -24,6 +24,7 @@ class LinkedList:
             print(temp.val)
             temp = temp.next
 
+
     def reverse_linked_list(self):
         prev = None
         curr = self.head
@@ -36,6 +37,20 @@ class LinkedList:
             curr = nextNode
 
         self.head = prev
+
+
+    # def reverse_linked_list(self):
+    #     prev = None
+    #     curr = self.head
+
+    #     while curr is not None:
+    #         nextNode = curr.next
+    #         curr.next = prev
+
+    #         prev = curr
+    #         curr = nextNode
+
+    #     self.head = prev
 
     
 linked_list = LinkedList()
