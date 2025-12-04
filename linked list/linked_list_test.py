@@ -25,8 +25,9 @@ class LinkedList:
             temp = temp.next
 
     def reverse_linked_list(self):
-        curr = self.head
         prev = None
+        curr = self.head
+
         while curr is not None:
             nextNode = curr.next
             curr.next = prev
@@ -35,6 +36,7 @@ class LinkedList:
             curr = nextNode
 
         self.head = prev
+
     
 linked_list = LinkedList()
 linked_list.append(0)
