@@ -13,12 +13,9 @@ class Solution:
         while temp:
             if cnt > n:
                 prev = prev.next
-                print("prevs", prev.val)
                 # prev = prev.next
             temp = temp.next
             cnt += 1
-        if prev:
-            print("prev", prev.val)
         if prev.next:
             print("prev.next", prev.next.val)
             prev.next = prev.next.next
