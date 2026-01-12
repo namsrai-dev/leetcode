@@ -42,13 +42,25 @@ class LinkedList:
             temp = temp.next
 
     def reverse_list(self):
-        prev, curr = None, self.head
+        # prev, curr = None, self.head
+        # while curr:
+        #     temp = curr.next
+        #     curr.next = prev
+        #     prev = curr
+        #     curr = temp
+
+        # self.head = prev
+        # return prev
+        prev = None
+        curr = self.head
         while curr:
+            print("-", curr.value)
             temp = curr.next
             curr.next = prev
             prev = curr
             curr = temp
-        return prev
+        
+        self.head = prev
 
 
 linked_list = LinkedList()
@@ -56,7 +68,8 @@ linked_list.append(1)
 linked_list.append(2)
 linked_list.append(3)
 linked_list.append(4)
-linked_list.pop()
-linked_list.print_list()
-print(linked_list.reverse_list())
+linked_list.reverse_list()
+# linked_list.pop()
+# linked_list.print_list()z
+# print(linked_list.reverse_list())
 linked_list.print_list()
