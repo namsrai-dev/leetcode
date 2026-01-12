@@ -16,18 +16,20 @@ class LRUCache:
         self.right.prev = self.left
 
     def get(self, key: int) -> int:
+        if self.cache.get(key):
+            temp_val = self.cache[key].val
+            self.delete_node(self.cache[key])
+            self.put(key, temp_val)
+            return self.cache[key].val
         return -1
 
-    def delete_node(self):
-        to_delete = self.right.prev
-        prev = self.right.prev.prev
-        prev.next = self.right
-        self.right.prev = prev
-        # next = self.right.next.next
-        # prev.next = next
-        # next.prev = prev
-        print("to_delete.key", to_delete.key)
-        print("self.cache[to_delete.key]", self.cache[to_delete.key])
+    def delete_node(self, node=None):
+        to_delete = node
+        prev = to_delete.prev
+        next = to_delete.next
+        prev.next = next
+        next.prev = prev
+        # self.right.prev = prev
         del self.cache[to_delete.key]
 
 
@@ -39,6 +41,9 @@ class LRUCache:
 
 
     def put(self, key: int, value: int) -> None:
+        if self.cache.get(key):
+            self.delete_node(self.cache.get(key))
+
         new_node = ListNode(key, value)
         next = self.left.next
         # prev = self.left.next.prev
@@ -50,7 +55,7 @@ class LRUCache:
         self.cache[key] = new_node
 
         if len(self.cache) > self.capacity:
-            self.delete_node()
+            self.delete_node(self.right.prev)
 
 
 
@@ -58,8 +63,12 @@ class LRUCache:
 obj = LRUCache(2)
 obj.put(1,1)
 obj.put(2,2)
-obj.put(4,4)
+obj.get(1)
 obj.put(3,3)
+obj.get(2)
+obj.put(4,4)
+obj.get(1)
+obj.get(3)
+obj.get(4)
 obj.print_list()
-# param_1 = obj.get(key)
 # obj.put(key,value)
