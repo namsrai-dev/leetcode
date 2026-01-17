@@ -28,9 +28,18 @@ class LinkedList:
     
     def merge_group(self, k):
         temp = self.head
+        temp_head = None
+        temp_tail = None
         while temp:
-            tail = self.group_list(temp, k)
-            temp = tail.next if tail else None
+            new_head, new_tail, next = self.group_list(temp, k)
+            if not temp_head:
+                temp_head = new_head
+            else:
+                temp_tail.next = new_head
+            temp_tail = new_tail
+            temp = next
+
+        self.head = temp_head
 
     def group_list(self, head, k):
         cnt = 1
@@ -41,11 +50,29 @@ class LinkedList:
 
         print("head value =>", head.val)
         print("tail value =>", temp.val if temp else None)
-        if cnt == k:
-            self.revese_list(k)
+        print("tail next =>", temp.next if temp and temp.next else None)
+        print("cnt == k ------------- ", cnt, k)
+        if cnt == k and temp:
+            next = temp.next if temp and temp.next else None
+            if temp and temp.next:
+                temp.next = None
+            new_head, new_tail = self.revese_list(head, k)
+            return new_head, new_tail, next
+        else:
+            return head, None, None
 
-    def revese_list(self, k):
-        pass
+    def revese_list(self, head, k):
+        prev = None
+        curr = head
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+
+        return prev, head
+
+
 
         # return temp
 
@@ -56,8 +83,9 @@ my_list.append(2)
 my_list.append(3)
 my_list.append(4)
 my_list.append(5)
-my_list.append(6)
 
 my_list.print_list()
 
-my_list.merge_group(2)
+my_list.merge_group(3)
+
+my_list.print_list()
