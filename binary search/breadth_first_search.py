@@ -65,7 +65,8 @@ if __name__ == '__main__':
 
     # Perform level order traversal and get the result
     res = levelOrder(root)
-    for level in res:
-        for val in level:
-            print(val, end=' ')
-        print()
+    print(res)
+    # for level in res:
+    #     for val in level:
+    #         print(val, end=' ')
+    #     print()
