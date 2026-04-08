@@ -46,8 +46,20 @@ from typing import List
 
 class Solution:
     def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
-        pass
+        ret = []
+        arr = []
+
+        def dfs(arr):
+            pass
+
+
+        for i, num in enumerate(nums):
+            # dfs(i)
+            print(i, num)
+
+        return ret
 
 
 sol = Solution()
+
 print(sol.combinationSum([2,5,6,9], 9))
