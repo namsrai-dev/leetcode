@@ -38,42 +38,33 @@ from typing import List
 
 
 class Solution:
-    def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
-        nums = sorted(nums)
-        ret = []
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        candidates.sort()
 
-        def arr_sum(my_arr):
-            total_sum = 0
-            for i in my_arr:
-                total_sum += i
-            return total_sum
+        def dfs(i, cur, total):
+            print("chck1")
+            if total == target:
+                res.append(cur.copy())
+                return
+            if total > target or i == len(candidates):
+                return
 
-        def dfs(arr1, arr2):
-            if arr_sum(arr2) == target:
-                ret.append(arr2)
-                # return
-            
-            for i, num in enumerate(arr1):
-                new_arr = arr2.copy()
-                new_arr.append(num)
-                if arr_sum(new_arr) <= target:
-                    dfs(arr1[i+1:], new_arr)
+            cur.append(candidates[i])
+            dfs(i + 1, cur, total + candidates[i])
+            print(cur,"cur before pop")
+            cur.pop()
 
-        index = 0
 
-        while len(nums) > index:
-            # print(nums[index])
-            dfs(nums[index+1:], [nums[index]])
-            if len(nums) > index + 1 and nums[index + 1] == nums[index]:
-                index+=1    
-            index+=1
+            while i + 1 < len(candidates) and candidates[i] == candidates[i+1]:
+                print("chck2")
+                i += 1
+            dfs(i + 1, cur, total)
 
-        # for i, num in enumerate(nums):
-        #     dfs(nums[i+1:], [num])
-
-        return ret
+        dfs(0, [], 0)
+        return res
 
 
 sol = Solution()
 
-print(sol.combinationSum([1,2,3,4,5], 7))
+print(sol.combinationSum2([9,2,2,4,6,1,5], 8))
