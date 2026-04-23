@@ -22,4 +22,51 @@
 # 1 <= nums.length <= 11
 # -20 <= nums[i] <= 20
 
+from typing import List
 
+
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+
+        ret = [[]]
+
+        for num in nums:
+            arr = []
+            for i in ret:
+                # print("the i was", i)
+                arr.append(i)
+                
+                i_cop = i.copy()
+                i_cop.append(num)
+                if i_cop not in ret:
+                    arr.append(i_cop)
+
+            ret = arr
+        
+
+sol = Solution()
+sol.subsetsWithDup([1,2,1])
+
+
+
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+
+        def backtrack(i, subset):
+            if i == len(nums):
+                res.append(subset[::])
+                return
+
+            subset.append(nums[i])
+            backtrack(i + 1, subset)
+            subset.pop()
+
+            while i + 1 < len(nums) and nums[i] == nums[i + 1]:
+                i += 1
+            backtrack(i + 1, subset)
+
+        backtrack(0, [])
+        return res
