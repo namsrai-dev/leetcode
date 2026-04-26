@@ -47,25 +47,19 @@ class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         ret = []
 
-        def backtrack(num_dict):
-            nonlocal ret
-            if len(ret) == 0:
-                ret = num_dict
+        def backTrack(i, curStr):
+            if len(curStr) == len(digits):
+                ret.append(curStr)
                 return
             
-            my_arr = []
-            # ret_copy = ret.copy()
-            for i in ret:
-                for j in num_dict:
-                    my_arr.append(i+j)
-                  
-            ret = my_arr
+            for c in num_dicts[digits[i]]:
+                backTrack(i+1, curStr + c)
 
-        
-        for i in digits:
-            backtrack(num_dicts[i])
+        if digits:
+            backTrack(0, "")
 
         return ret
+
 
 
 sol = Solution()
