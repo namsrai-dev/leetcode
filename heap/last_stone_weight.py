@@ -35,9 +35,36 @@
 # 1 <= stones[i] <= 100
 
 
+import heapq
 from typing import List
 
 
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        pass
+
+        max_heap = [-x for x in stones]
+
+        heapq.heapify(max_heap)
+
+        while len(max_heap) > 1:
+
+            x = heapq.heappop(max_heap) * (-1)
+            y = heapq.heappop(max_heap) * (-1)
+
+            if x != y:
+                heapq.heappush(max_heap, (x-y) * -1)
+
+
+            # print(x)
+            # print(y)
+
+        if len(max_heap) == 0:
+            return 0
+
+        return max_heap[0] * -1
+
+
+sol = Solution()
+print(sol.lastStoneWeight([2,3,6,2,4]))
+print(sol.lastStoneWeight([2,2]))
+print(sol.lastStoneWeight([1,3]))
