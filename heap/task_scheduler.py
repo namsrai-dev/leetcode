@@ -37,6 +37,7 @@ from typing import List
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
         my_dict = {}
+        res = []
 
         for task in tasks:
             if task in my_dict:
@@ -44,14 +45,42 @@ class Solution:
             else:
                 my_dict[task] = 1
 
-        max_heap = [(-count, task) for task, count in my_dict.items()]
+        max_heap = [[-count, task] for task, count in my_dict.items()]
 
         # 2. Heap бүтэц рүү шилжүүлэх
         heapq.heapify(max_heap)
 
-        print(max_heap)
 
-        return 0
+        # for heap in max_heap:
+        idx = 0
+
+        print("first heap ",max_heap)
+
+        while max_heap:
+            
+            res.append(max_heap[idx][1])
+
+            max_heap[idx][0] = max_heap[idx][0] + 1
+
+            if max_heap[idx][0] == 0:
+                print("before pop", max_heap)
+                heapq.heappop(max_heap)
+                print("after pop", max_heap)
+
+
+            print(max_heap)
+            print(res)
+
+            if idx + 1 > len(max_heap):
+                idx = 0
+            else:
+                idx += 1
+                
+
+
+
+
+        return len(res)
 
 
 
