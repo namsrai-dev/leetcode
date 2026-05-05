@@ -30,57 +30,32 @@
 # 1 <= tasks.length <= 1000
 # 0 <= n <= 100
 
+from collections import deque
 import heapq
-from typing import List
+from typing import Counter, List
 
 
 class Solution:
+    
     def leastInterval(self, tasks: List[str], n: int) -> int:
-        my_dict = {}
-        res = []
+        count = Counter(tasks)
+        maxHeap = [-cnt for cnt in count.values()]
+        heapq.heapify(maxHeap)
 
-        for task in tasks:
-            if task in my_dict:
-                my_dict[task] += 1
+        time = 0
+        q = deque()  # pairs of [-cnt, idleTime]
+        while maxHeap or q:
+            time += 1
+
+            if not maxHeap:
+                time = q[0][1]
             else:
-                my_dict[task] = 1
-
-        max_heap = [[-count, task] for task, count in my_dict.items()]
-
-        # 2. Heap бүтэц рүү шилжүүлэх
-        heapq.heapify(max_heap)
-
-
-        # for heap in max_heap:
-        idx = 0
-
-        print("first heap ",max_heap)
-
-        while max_heap:
-            
-            res.append(max_heap[idx][1])
-
-            max_heap[idx][0] = max_heap[idx][0] + 1
-
-            if max_heap[idx][0] == 0:
-                print("before pop", max_heap)
-                heapq.heappop(max_heap)
-                print("after pop", max_heap)
-
-
-            print(max_heap)
-            print(res)
-
-            if idx + 1 > len(max_heap):
-                idx = 0
-            else:
-                idx += 1
-                
-
-
-
-
-        return len(res)
+                cnt = 1 + heapq.heappop(maxHeap)
+                if cnt:
+                    q.append([cnt, time + n])
+            if q and q[0][1] == time:
+                heapq.heappush(maxHeap, q.popleft()[0])
+        return time
 
 
 
