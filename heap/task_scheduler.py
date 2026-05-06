@@ -42,11 +42,15 @@ class Solution:
         maxHeap = [-cnt for cnt in count.values()]
         heapq.heapify(maxHeap)
 
+        print("maxHeap", maxHeap)
+
         time = 0
         q = deque()  # pairs of [-cnt, idleTime]
         while maxHeap or q:
             time += 1
-
+            print(time)
+            print("q", q)
+            
             if not maxHeap:
                 time = q[0][1]
             else:
