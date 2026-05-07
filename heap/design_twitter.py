@@ -37,3 +37,79 @@
 
 # 1 <= userId, followerId, followeeId <= 100
 # 0 <= tweetId <= 1000
+
+from collections import defaultdict
+import heapq
+from typing import List
+
+
+# class Twitter:
+
+#     def __init__(self):
+#         self.users = []
+
+#     def postTweet(self, userId: int, tweetId: int) -> None:
+#         pass
+
+#     def getNewsFeed(self, userId: int) -> List[int]:
+#         pass
+
+#     def follow(self, followerId: int, followeeId: int) -> None:
+#         pass
+        
+
+#     def unfollow(self, followerId: int, followeeId: int) -> None:
+#         pass
+
+class Twitter:
+    def __init__(self):
+        self.count = 0
+        self.tweetMap = defaultdict(list)  # userId -> list of [count, tweetIds]
+        self.followMap = defaultdict(set)  # userId -> set of followeeId
+
+    def postTweet(self, userId: int, tweetId: int) -> None:
+        self.tweetMap[userId].append([self.count, tweetId])
+
+        self.count -= 1
+
+    def getNewsFeed(self, userId: int) -> List[int]:
+        res = []
+        minHeap = []
+        print("self.followMap 1", userId, self.followMap)
+        print("self.followMap 2", self.followMap)
+        for followeeId in self.followMap[userId]:
+            if followeeId in self.tweetMap:
+                index = len(self.tweetMap[followeeId]) - 1
+                print("index", index)
+                count, tweetId = self.tweetMap[followeeId][index]
+                print("count, tweetId", count, tweetId)
+                heapq.heappush(minHeap, [count, tweetId, followeeId, index - 1])
+                print("minHeap", minHeap)
+
+        while minHeap and len(res) < 10:
+            count, tweetId, followeeId, index = heapq.heappop(minHeap)
+            res.append(tweetId)
+            if index >= 0:
+                count, tweetId = self.tweetMap[followeeId][index]
+                heapq.heappush(minHeap, [count, tweetId, followeeId, index - 1])
+        return res
+
+    def follow(self, followerId: int, followeeId: int) -> None:
+        self.followMap[followerId].add(followeeId)
+
+    def unfollow(self, followerId: int, followeeId: int) -> None:
+        if followeeId in self.followMap[followerId]:
+            self.followMap[followerId].remove(followeeId)
+
+twitter = Twitter()
+
+twitter.postTweet(1, 10); # User 1 posts a new tweet with id = 10.
+twitter.postTweet(2, 20); # User 2 posts a new tweet with id = 20.
+twitter.postTweet(2, 30); # User 2 posts a new tweet with id = 30.
+print(twitter.getNewsFeed(1));   # User 1's news feed should only contain their own tweets -> [10].
+twitter.getNewsFeed(2);   # User 2's news feed should only contain their own tweets -> [20].
+twitter.follow(1, 2);     # User 1 follows user 2.
+twitter.getNewsFeed(1);   # User 1's news feed should contain both tweets from user 1 and user 2 -> [20, 10].
+twitter.getNewsFeed(2);   # User 2's news feed should still only contain their own tweets -> [20].
+twitter.unfollow(1, 2);   # User 1 unfollows user 2.
+twitter.getNewsFeed(1);   # User 1's news feed should only contain their own tweets -> [10].
