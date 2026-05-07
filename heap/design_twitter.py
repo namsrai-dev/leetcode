@@ -75,16 +75,11 @@ class Twitter:
     def getNewsFeed(self, userId: int) -> List[int]:
         res = []
         minHeap = []
-        print("self.followMap 1", userId, self.followMap)
-        print("self.followMap 2", self.followMap)
         for followeeId in self.followMap[userId]:
             if followeeId in self.tweetMap:
                 index = len(self.tweetMap[followeeId]) - 1
-                print("index", index)
                 count, tweetId = self.tweetMap[followeeId][index]
-                print("count, tweetId", count, tweetId)
                 heapq.heappush(minHeap, [count, tweetId, followeeId, index - 1])
-                print("minHeap", minHeap)
 
         while minHeap and len(res) < 10:
             count, tweetId, followeeId, index = heapq.heappop(minHeap)
