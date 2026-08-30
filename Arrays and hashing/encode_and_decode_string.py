@@ -24,4 +24,4 @@ class Solution:
         return res
     
 solution = Solution()
-print(solution.decode(solution.encode(["neet","code","love","you"])))
+print(solution.decode(solution.encode(["neet","code","love","you"])))   
