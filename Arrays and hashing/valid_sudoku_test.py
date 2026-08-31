@@ -50,3 +50,41 @@
 # board[i].length == 9
 # board[i][j] is a digit 1-9 or '.'.
 
+
+
+from rpds import List
+
+
+from typing import List
+
+
+board1 = [
+ ["1","2",".",".","3",".",".",".","."],
+ ["4",".",".","5",".",".",".",".","."],
+ [".","9","8",".",".",".",".",".","3"],
+ ["5",".",".",".","6",".",".",".","4"],
+ [".",".",".","8",".","3",".",".","5"],
+ ["7",".",".",".","2",".",".",".","6"],
+ [".",".",".",".",".",".","2",".","."],
+ [".",".",".","4","1","9",".",".","8"],
+ [".",".",".",".","8",".",".","7","9"]
+]
+
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        ret = True
+
+        for i in board:
+            print("i",i)
+            if self.hasDuplicate(i):
+                ret = False
+        return ret
+
+    def hasDuplicate(self, i: List[str]) -> bool:
+        char_list = [char for char in i if char != '.']
+        print("char_list", char_list)
+        return len(char_list) != len(set(char_list))
+
+
+sol = Solution()
+sol.isValidSudoku(board1)
