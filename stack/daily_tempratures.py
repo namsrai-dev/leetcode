@@ -34,8 +34,11 @@ class Solution:
         for i, t in enumerate(temperatures):
             while stack and t > stack[-1][0]:
                 stackT, stackInd = stack.pop()
+                # print("poped", stackT, stackInd)
+                # print("i - stackInd", i - stackInd)
                 res[stackInd] = i - stackInd
             stack.append((t, i))
+            print(stack)
         return res
     
 sol = Solution()
