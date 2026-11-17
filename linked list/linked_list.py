@@ -1,75 +1,21 @@
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
+# LRU Cache
+# Medium
+# Topics
+# Company Tags
+# Hints
+# Implement the Least Recently Used (LRU) cache class LRUCache. The class should support the following operations
 
+# LRUCache(int capacity) Initialize the LRU cache of size capacity.
+# int get(int key) Return the value corresponding to the key if the key exists, otherwise return -1.
+# void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the introduction of the new pair causes the cache to exceed its capacity, remove the least recently used key.
+# A key is considered used if a get or a put operation is called on it.
 
-class LinkedList:
-    def __init__(self):
-        self.head = None
+# Ensure that get and put each run in 
+# O
+# (
+# 1
+# )
+# O(1) average time complexity.
 
-    def append(self, value):
-        new_node = Node(value)
+# Example 1:
 
-        if self.head is None:
-            self.head = new_node
-        else:
-            temp = self.head
-            while temp.next is not None:
-                temp = temp.next
-            temp.next = new_node
-
-    def pop(self):
-        if self.head is None:
-            return None
-        
-        if not self.head.next:
-            pop_value = self.head.value
-            self.head = None
-            return pop_value
-        
-        cur = self.head
-        while cur.next.next:
-            cur = cur.next
-
-        pop_value = cur.next.value
-        cur.next = None
-
-    def print_list(self):
-        temp = self.head
-        while temp:
-            print(temp.value)
-            temp = temp.next
-
-    def reverse_list(self):
-        # prev, curr = None, self.head
-        # while curr:
-        #     temp = curr.next
-        #     curr.next = prev
-        #     prev = curr
-        #     curr = temp
-
-        # self.head = prev
-        # return prev
-        prev = None
-        curr = self.head
-        while curr:
-            print("-", curr.value)
-            temp = curr.next
-            curr.next = prev
-            prev = curr
-            curr = temp
-        
-        self.head = prev
-
-
-linked_list = LinkedList()
-linked_list.append(1)
-linked_list.append(2)
-linked_list.append(3)
-linked_list.append(4)
-linked_list.reverse_list()
-# linked_list.pop()
-# linked_list.print_list()z
-# print(linked_list.reverse_list())
-linked_list.print_list()

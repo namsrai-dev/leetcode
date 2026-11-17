@@ -1,53 +1,30 @@
-# class Solution:
-#     def characterReplacement(self, s: str, k: int) -> int:
-        # my_dict = {}
-        # res = 0
-        # l = r = 0
+from collections import deque
+from typing import List
 
-        # while r < len(s):
-        #     if s[r] not in my_dict:
-        #         my_dict[s[r]] = 1
-        #     else:
-        #         my_dict[s[r]] += 1
-        #     min_key = 0
-        #     max_val = 0
-        #     if len(my_dict) > 1:
-        #         for key, val in my_dict.items():
-        #             max_val+= val
-        #             if min_key == 0:
-        #                 min_key = val
-        #             else:
-        #                 min_key = min(min_key, val)
-        #     print(my_dict, min_key)
-        #     if min_key > k:
-        #         my_dict[s[l]] -= 1
-        #         l += 1
-        #     else:
-        #         print(max_val)
-        #         res = max(max_val, res)
-        #         r += 1
-                
-        # return res
 
 class Solution:
-    def characterReplacement(self, s: str, k: int) -> int:
-        res = 0
-        charSet = set(s)
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        output = []
+        q = deque()  # index
+        l = r = 0
 
-        for c in charSet:
-            count = l = 0
-            for r in range(len(s)):
-                if s[r] == c:
-                    count += 1
+        while r < len(nums):
+            print("each time r", r)
+            print("q", q)
+            while q and nums[q[-1]] < nums[r]:
+                q.pop()
+            q.append(r)
 
-                while (r - l + 1) - count > k:
-                    if s[l] == c:
-                        count -= 1
-                    l += 1
+            if l > q[0]:
+                q.popleft()
 
-                res = max(res, r - l + 1)
-        return res
+            if (r + 1) >= k:
+                output.append(nums[q[0]])
+                l += 1
+            r += 1
+
+        return output
+
+
 sol = Solution()
-
-print(sol.characterReplacement("XYYX", 2))
-print(sol.characterReplacement("AAABABB", 1))
+print(sol.maxSlidingWindow([1,2,1,0,4,2,6], 3))
