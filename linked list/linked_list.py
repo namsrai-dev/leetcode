@@ -44,7 +44,11 @@ class LRUCache:
         self.right.prev = self.right
 
     def remove(self, node):
-        pass
+        prev = node.prev
+        next = node.next
+        prev.next = next
+        next.prev = prev
+        del self.my_dict[node.key]
 
     def insert(self, node):
         pass
@@ -53,7 +57,12 @@ class LRUCache:
         pass
         
     def put(self, key: int, value: int) -> None:
+
+        if len(self.my_dict) == self.capacity:
+            self.remove(self.right.prev)
+
         new_node = ListNode(key, value)
+        self.my_dict[key] = new_node
         l_n = self.left.next
         new_node.next = l_n
         l_n.prev = new_node
