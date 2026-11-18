@@ -38,8 +38,8 @@ class LRUCache:
     def __init__(self, capacity: int):
         self.capacity = capacity
         self.my_dict = {}
-        self.left = ListNode(0)
-        self.right = ListNode(0)
+        self.left = ListNode(0,0)
+        self.right = ListNode(0,0)
         self.left.next = self.right
         self.right.prev = self.right
 
@@ -49,9 +49,26 @@ class LRUCache:
     def insert(self, node):
         pass
 
-
     def get(self, key: int) -> int:
         pass
         
     def put(self, key: int, value: int) -> None:
-        pass
+        new_node = ListNode(key, value)
+        l_n = self.left.next
+        new_node.next = l_n
+        l_n.prev = new_node
+        self.left.next = new_node
+        new_node.prev = self.left
+
+    def print_list(self):
+        temp = self.left
+        while temp:
+            print(temp.val)
+            temp = temp.next
+
+sol = LRUCache(2)
+sol.put(1,1)
+sol.put(2,2)
+sol.put(3,3)
+sol.print_list()
+
