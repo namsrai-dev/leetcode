@@ -41,7 +41,7 @@ class LRUCache:
         self.left = ListNode(0,0)
         self.right = ListNode(0,0)
         self.left.next = self.right
-        self.right.prev = self.right
+        self.right.prev = self.left
 
     def remove(self, node):
         prev = node.prev
@@ -51,10 +51,22 @@ class LRUCache:
         del self.my_dict[node.key]
 
     def insert(self, node):
-        pass
+        l_n = self.left.next
+        node.next = l_n
+        l_n.prev = node
+        self.left.next = node
+        node.prev = self.left
 
     def get(self, key: int) -> int:
-        pass
+        if key in self.my_dict:
+            node = self.my_dict[key]
+            self.remove(node)
+            self.my_dict[key] = node
+            self.insert(node)
+            return node.val  
+
+
+        return -1
         
     def put(self, key: int, value: int) -> None:
 
@@ -63,11 +75,7 @@ class LRUCache:
 
         new_node = ListNode(key, value)
         self.my_dict[key] = new_node
-        l_n = self.left.next
-        new_node.next = l_n
-        l_n.prev = new_node
-        self.left.next = new_node
-        new_node.prev = self.left
+        self.insert(new_node)
 
     def print_list(self):
         temp = self.left
@@ -76,8 +84,4 @@ class LRUCache:
             temp = temp.next
 
 sol = LRUCache(2)
-sol.put(1,1)
-sol.put(2,2)
-sol.put(3,3)
-sol.print_list()
-
+sol.get(2)
