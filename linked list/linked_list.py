@@ -70,6 +70,9 @@ class LRUCache:
         
     def put(self, key: int, value: int) -> None:
 
+        if key in self.my_dict:
+            self.remove(self.my_dict[key])
+
         if len(self.my_dict) == self.capacity:
             self.remove(self.right.prev)
 
@@ -85,3 +88,7 @@ class LRUCache:
 
 sol = LRUCache(2)
 sol.get(2)
+sol.put(2,6)
+sol.get(1)
+sol.put(1,5)
+sol.put(1,2)
