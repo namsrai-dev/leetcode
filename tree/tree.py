@@ -15,15 +15,14 @@ class Solution:
     def is_balanced(self, root: Optional[Node]) -> bool:
         def dfs(root):
             if not root:
-                return None
+                return [True, 0]
 
             print("root value ->",root.val)            
+            
             dfs(root.left)
             dfs(root.right)
 
-        dfs(root)
-
-        return False
+        return dfs(root)[0]
 
 
     def build_tree(self, arr):
