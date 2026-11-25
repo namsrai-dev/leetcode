@@ -1,5 +1,6 @@
 
 from collections import deque
+from typing import Optional
 
 
 class Node:
@@ -10,6 +11,20 @@ class Node:
 
 
 class Solution:
+
+    def is_balanced(self, root: Optional[Node]) -> bool:
+        def dfs(root):
+            if not root:
+                return None
+
+            print("root value ->",root.val)            
+            dfs(root.left)
+            dfs(root.right)
+
+        dfs(root)
+
+        return False
+
 
     def build_tree(self, arr):
         if not arr or arr[0] is None:
@@ -92,11 +107,18 @@ class Solution:
 
 sol = Solution()
 root = sol.build_tree([1,2,3,None,None,4])
-root2 = sol.build_tree([1,2,2,3,None,None,3,4,None,None,4])
+root2 = sol.build_tree([1,2,3,4,None,None,5,6,None,None,7])
+root3 = sol.build_tree([5, 3, 8, 1, None, 7, 9, None, 2, 6])
 print()
 sol.print_tree(root)
+sol.is_balanced(root)
 print()
 print("="*50)
 print()
 sol.print_tree(root2)
-
+sol.is_balanced(root2)
+print()
+print("="*50)
+print()
+sol.print_tree(root3)
+sol.is_balanced(root3)
