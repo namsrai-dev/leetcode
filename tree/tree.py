@@ -18,9 +18,13 @@ class Solution:
                 return [True, 0]
 
             print("root value ->",root.val)            
-            
-            dfs(root.left)
-            dfs(root.right)
+            left_node = dfs(root.left)
+            right_node = dfs(root.right)
+            print("here the check", root.val, [abs(left_node[1] - right_node[1]) <= 1, max(left_node[1], right_node[1]) + 1])
+            if left_node[0] == False or right_node[0] == False:
+                return[False, max(left_node[1], right_node[1]) + 1]
+
+            return [abs(left_node[1] - right_node[1]) <= 1, max(left_node[1], right_node[1]) + 1]
 
         return dfs(root)[0]
 
@@ -110,14 +114,14 @@ root2 = sol.build_tree([1,2,3,4,None,None,5,6,None,None,7])
 root3 = sol.build_tree([5, 3, 8, 1, None, 7, 9, None, 2, 6])
 print()
 sol.print_tree(root)
-sol.is_balanced(root)
+print(sol.is_balanced(root))
 print()
 print("="*50)
 print()
 sol.print_tree(root2)
-sol.is_balanced(root2)
+print(sol.is_balanced(root2))
 print()
 print("="*50)
 print()
 sol.print_tree(root3)
-sol.is_balanced(root3)
+print(sol.is_balanced(root3))
