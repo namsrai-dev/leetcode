@@ -29,6 +29,28 @@ class Solution:
         return dfs(root)[0]
 
 
+    def isSameTree(self, p: Optional[Node], q: Optional[Node]) -> bool:
+        if not p and not q:
+            return True
+        
+        if not p and q:
+            return False
+        
+        elif not q and p:
+            return False
+
+        elif q.val != p.val:
+            return False
+
+        left = self.isSameTree(p.left, q.left)
+        right = self.isSameTree(p.right, q.right)
+
+        if left == False or right == False:
+            return False
+
+        return True
+
+
     def build_tree(self, arr):
         if not arr or arr[0] is None:
             return None
